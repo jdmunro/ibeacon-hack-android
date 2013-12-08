@@ -12,6 +12,7 @@ import android.app.Activity;
 
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.util.Log;
 import android.widget.EditText;
 
 public class RangingActivity extends Activity implements IBeaconConsumer {
@@ -29,6 +30,17 @@ public class RangingActivity extends Activity implements IBeaconConsumer {
         super.onDestroy();
         iBeaconManager.unBind(this);
     }
+    @Override 
+    protected void onPause() {
+    	super.onPause();
+    	if (iBeaconManager.isBound(this)) iBeaconManager.setBackgroundMode(this, true);    		
+    }
+    @Override 
+    protected void onResume() {
+    	super.onResume();
+    	if (iBeaconManager.isBound(this)) iBeaconManager.setBackgroundMode(this, false);    		
+    }
+
     @Override
     public void onIBeaconServiceConnect() {
         iBeaconManager.setRangeNotifier(new RangeNotifier() {

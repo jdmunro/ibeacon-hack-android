@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.radiusnetworks.ibeaconreference.MainActivity"
+            android:name="com.radiusnetworks.ibeaconreference.MonitoringActivity"
             android:label="@string/app_name" >
             <intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -29,28 +29,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.radiusnetworks.ibeaconreference.MonitoringActivity"
+            android:name="com.radiusnetworks.ibeaconreference.BackgroundActivity"
             android:label="@string/app_name" >
             <intent-filter>
             </intent-filter>
         </activity>
         
-        <service android:enabled="true"
-            android:exported="true"
-            android:isolatedProcess="false"
-            android:label="iBeacon"
-            android:name="com.radiusnetworks.ibeacon.service.IBeaconService">
-        </service>    
-
-        <service android:enabled="true" 
-            android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor">
-			<meta-data android:name="background" android:value="true" />
-            <intent-filter 
-               android:priority="1" >
-                <action android:name="com.radiusnetworks.ibeaconreference.DID_RANGING" />
-                <action android:name="com.radiusnetworks.ibeaconreference.DID_MONITORING" />
-            </intent-filter>
-        </service>  
     </application>
 
 </manifest>
