@@ -1,6 +1,7 @@
 package com.radiusnetworks.ibeaconreference;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import com.radiusnetworks.ibeacon.IBeacon;
 import com.radiusnetworks.ibeacon.IBeaconConsumer;
@@ -9,7 +10,6 @@ import com.radiusnetworks.ibeacon.Region;
 import com.radiusnetworks.ibeacon.RangeNotifier;
 
 import android.app.Activity;
-
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -49,7 +49,11 @@ public class RangingActivity extends Activity implements IBeaconConsumer {
             if (iBeacons.size() > 0) {
             	EditText editText = (EditText)RangingActivity.this
 						.findViewById(R.id.rangingText);
-            	logToDisplay("The first iBeacon I see is about "+iBeacons.iterator().next().getAccuracy()+" meters away.");            	
+            	
+            	for (Iterator<IBeacon> iterator = iBeacons.iterator(); iterator.hasNext();) {
+                    IBeacon beacon = (IBeacon)iterator.next();
+                    logToDisplay(beacon.getProximityUuid() + " is about " + beacon.getAccuracy() + " meters away.");     
+                }          	
             }
         }
 
